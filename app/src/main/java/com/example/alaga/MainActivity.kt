@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        //Changes
         val signIn : Button = findViewById(R.id.signIn)
         signIn.setOnClickListener{
             val intent = Intent(this,Login::class.java)
