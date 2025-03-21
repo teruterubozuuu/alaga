@@ -20,13 +20,14 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        //Changes
+        //Add button navigation to login activity
         val signIn : Button = findViewById(R.id.signIn)
         signIn.setOnClickListener{
             val intent = Intent(this,Login::class.java)
             startActivity(intent)
         }
 
+        //Add navigation to sign up activity
         val signUp : TextView = findViewById(R.id.signUp)
         signUp.setOnClickListener{
             val intent = Intent(this, Register::class.java)
