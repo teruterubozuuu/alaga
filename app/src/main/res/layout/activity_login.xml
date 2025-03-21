@@ -110,7 +110,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:padding="8dp"
             android:hint="Password"
             android:background="@drawable/edittext"
@@ -119,6 +119,36 @@
             >
 
         </EditText>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Login"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/darkBlue">
+
+        </Button>
+
+        <TextView
+            android:id="@+id/SUredirect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account? Sign up here"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/darkBlue"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
+            android:clickable="true"
+            android:focusable="true"
+            >
+        </TextView>
 
 
     </LinearLayout>
