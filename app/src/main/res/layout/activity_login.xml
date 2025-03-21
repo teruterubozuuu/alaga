@@ -15,7 +15,7 @@
         android:backgroundTint="@color/white"
         android:text="Back"
         android:textColor="@color/lightBlue"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.085"
@@ -85,14 +85,65 @@
             >
         </TextView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:text="Admin"
+            android:textSize="15sp"
+            android:padding="0sp"
             android:background="@drawable/mybutton"
             android:layout_marginTop="5dp">
-
         </Button>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Doctor"
+            android:textSize="15sp"
+            android:padding="0sp"
+            android:background="@drawable/mybutton"
+            android:layout_marginTop="5dp">
+        </Button>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Nurse"
+            android:textSize="15sp"
+            android:padding="0sp"
+            android:background="@drawable/mybutton"
+            android:layout_marginTop="5dp">
+        </Button>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Patient"
+            android:textSize="15sp"
+            android:padding="0sp"
+            android:background="@drawable/mybutton"
+            android:layout_marginTop="5dp">
+        </Button>
+
+
+
+    </LinearLayout>
+
+
 
         <EditText
             android:layout_width="match_parent"
@@ -124,7 +175,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="Login"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textColor="@color/white"
             android:layout_marginTop="40dp"
             android:backgroundTint="@color/darkBlue">
