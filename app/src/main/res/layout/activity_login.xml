@@ -92,55 +92,61 @@
         android:gravity="center"
         android:layout_marginTop="7dp">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
             android:text="Admin"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
             android:textSize="15sp"
             android:padding="0sp"
             android:background="@drawable/mybutton"
-            android:layout_marginTop="5dp">
-        </Button>
+            android:layout_marginTop="5dp" />
 
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:text="Doctor"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
             android:textSize="15sp"
             android:padding="0sp"
-            android:background="@drawable/mybutton"
-            android:layout_marginTop="5dp">
-        </Button>
+            android:background="@drawable/mybutton"/>
 
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
             android:text="Nurse"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
             android:textSize="15sp"
             android:padding="0sp"
-            android:background="@drawable/mybutton"
-            android:layout_marginTop="5dp">
-        </Button>
+            android:background="@drawable/mybutton"/>
 
-        <Button
+
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:layout_marginStart="5dp"
             android:layout_weight="1"
             android:text="Patient"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
             android:textSize="15sp"
             android:padding="0sp"
             android:background="@drawable/mybutton"
-            android:layout_marginTop="5dp">
-        </Button>
+            android:layout_marginTop="5dp"/>
+
 
 
 
