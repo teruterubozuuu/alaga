@@ -85,72 +85,17 @@
             >
         </TextView>
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/SUname"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="7dp">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:text="Admin"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:padding="0sp"
-                android:background="@drawable/mybutton"
-                android:layout_marginTop="5dp" />
-
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:text="Doctor"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:padding="0sp"
-                android:background="@drawable/mybutton"/>
-
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:text="Nurse"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:padding="0sp"
-                android:background="@drawable/mybutton"/>
-
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_weight="1"
-                android:text="Patient"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="15sp"
-                android:padding="0sp"
-                android:background="@drawable/mybutton"
-                android:layout_marginTop="5dp"/>
-
-
-
-
-        </LinearLayout>
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:padding="8dp"
+            android:hint="Username"
+            android:background="@drawable/edittext"
+            android:textColorHint="@color/darkBlue"
+            android:textColor="@color/darkBlue"
+            />
 
 
 
@@ -158,7 +103,7 @@
             android:id="@+id/SUemail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:padding="8dp"
             android:hint="Email"
             android:background="@drawable/edittext"
@@ -181,6 +126,13 @@
             >
 
         </EditText>
+
+        <Spinner
+            android:id="@+id/SUrole"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            ></Spinner>
 
         <Button
             android:id="@+id/signUpBtn"

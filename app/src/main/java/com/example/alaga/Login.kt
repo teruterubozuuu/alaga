@@ -3,7 +3,9 @@ package com.example.alaga
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,6 +22,12 @@ class Login : AppCompatActivity() {
             insets
         }
 
+        val dbHelper = DatabaseHelper(this)
+
+        val nameInput = findViewById<EditText>(R.id.SIName)
+        val passwordInput = findViewById<EditText>(R.id.SIPassword)
+        val loginButton = findViewById<Button>(R.id.SILogin)
+
         val backSignin : Button = findViewById(R.id.SIBackButton)
 
         backSignin.setOnClickListener{
@@ -31,6 +39,20 @@ class Login : AppCompatActivity() {
         redirectSU.setOnClickListener{
             val intent = Intent(this, Register::class.java)
             startActivity(intent)
+        }
+
+        loginButton.setOnClickListener {
+            val name = nameInput.text.toString()
+            val password = passwordInput.text.toString()
+
+            val role = dbHelper.authenticateUser(name, password)
+
+            if (role != null) {
+                Toast.makeText(this, "Login Successful as $role", Toast.LENGTH_LONG).show()
+                startActivity(Intent(this,  Homepage::class.java))
+            } else {
+                Toast.makeText(this, "Invalid Email or Password", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }
