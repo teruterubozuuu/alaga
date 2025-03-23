@@ -5,8 +5,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Register"
-    android:background="@color/lightBlue">
+    tools:context=".Login"
+    android:background="@color/lightBlue" >
 
     <Button
         android:id="@+id/SUBackButton"
@@ -15,7 +15,7 @@
         android:backgroundTint="@color/white"
         android:text="Back"
         android:textColor="@color/lightBlue"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.085"
@@ -56,9 +56,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Create an account"
-            android:textStyle="bold"
+            android:fontFamily="sans-serif-light"
             android:textColor="@color/darkBlue"
-            android:textSize="20sp"
+            android:textSize="25sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +69,150 @@
             >
         </TextView>
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please choose user type"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/darkBlue"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
+            >
+        </TextView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="7dp">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:text="Admin"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:padding="0sp"
+                android:background="@drawable/mybutton"
+                android:layout_marginTop="5dp" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="Doctor"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:padding="0sp"
+                android:background="@drawable/mybutton"/>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:text="Nurse"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:padding="0sp"
+                android:background="@drawable/mybutton"/>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:text="Patient"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:padding="0sp"
+                android:background="@drawable/mybutton"
+                android:layout_marginTop="5dp"/>
+
+
+
+
+        </LinearLayout>
+
+
+
+        <EditText
+            android:id="@+id/SUemail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:padding="8dp"
+            android:hint="Email"
+            android:background="@drawable/edittext"
+            android:textColorHint="@color/darkBlue"
+            android:textColor="@color/darkBlue"
+            >
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/SUpassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:padding="8dp"
+            android:hint="Password"
+            android:background="@drawable/edittext"
+            android:textColorHint="@color/darkBlue"
+            android:textColor="@color/darkBlue"
+            >
+
+        </EditText>
+
+        <Button
+            android:id="@+id/signUpBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Sign up"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/darkBlue">
+
+        </Button>
+
+        <TextView
+            android:id="@+id/SIredirect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? Sign in here"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/darkBlue"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
+            android:clickable="true"
+            android:focusable="true"
+            >
+        </TextView>
+
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
