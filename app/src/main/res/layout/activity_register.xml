@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,14 +12,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login"
-    android:background="@color/lightBlue" >
+    android:background="@color/lightBlue"
+    >
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/SUBackButton"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/white"
-        android:text="Back"
+        android:text=""
+        android:background="@drawable/back_button"
+        android:drawableTint="@color/darkBlue"
         android:textColor="@color/lightBlue"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
-        android:text="Alaga"
+        android:text="Aruga"
         android:textColor="@color/white"
         android:textSize="60sp"
         android:textStyle="bold"
@@ -40,11 +48,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="540dp"
         android:background="@drawable/rounded_linearlayout"
         android:backgroundTint="@color/white"
         android:orientation="vertical"
-        android:padding="24dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="24dp"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -55,46 +66,35 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create an account"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom = "20dp"
             android:fontFamily="sans-serif-light"
+            android:text="Create an account"
+            android:textAlignment="center"
             android:textColor="@color/darkBlue"
             android:textSize="25sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="20dp"
-            android:textAlignment="center"
-            >
-        </TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Please choose user type"
-            android:fontFamily="sans-serif-light"
-            android:textColor="@color/darkBlue"
-            android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="20dp"
-            android:textAlignment="center"
-            >
-        </TextView>
+            app:layout_constraintTop_toTopOf="parent"></TextView>
 
         <EditText
             android:id="@+id/SUname"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:padding="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:hint="Username"
             android:background="@drawable/edittext"
-            android:textColorHint="@color/darkBlue"
+            android:textColorHint="@color/lightBlue"
             android:textColor="@color/darkBlue"
+            android:drawableStart="@drawable/username_icon"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/lightBlue"
             />
 
 
@@ -104,11 +104,17 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:padding="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:hint="Email"
             android:background="@drawable/edittext"
-            android:textColorHint="@color/darkBlue"
+            android:textColorHint="@color/lightBlue"
             android:textColor="@color/darkBlue"
+            android:drawableStart="@drawable/email_address_icon"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/lightBlue"
             >
 
         </EditText>
@@ -118,47 +124,67 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="10dp"
-            android:padding="8dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
             android:hint="Password"
             android:background="@drawable/edittext"
-            android:textColorHint="@color/darkBlue"
+            android:textColorHint="@color/lightBlue"
             android:textColor="@color/darkBlue"
+            android:drawableStart="@drawable/password_icon"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/lightBlue"
             >
 
         </EditText>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="sans-serif-light"
+            android:text="Please choose user type"
+            android:textColor="@color/lightBlack"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"></TextView>
 
         <Spinner
             android:id="@+id/SUrole"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:minHeight="50dp"
+            style="@style/SpinnerTextStyle"
             ></Spinner>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/signUpBtn"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="Sign up"
             android:textSize="20sp"
             android:textColor="@color/white"
-            android:layout_marginTop="40dp"
-            android:backgroundTint="@color/darkBlue">
-
-        </Button>
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button"/>
 
         <TextView
+            android:minHeight="70dp"
             android:id="@+id/SIredirect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Already have an account? Sign in here"
             android:fontFamily="sans-serif-light"
-            android:textColor="@color/darkBlue"
+            android:textColor="@color/lightBlack"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textAlignment="center"
             android:clickable="true"
             android:focusable="true"
@@ -168,3 +194,4 @@
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
