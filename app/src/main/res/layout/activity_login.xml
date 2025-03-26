@@ -5,6 +5,152 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".Login"
+    android:background="@color/lightBlue" >
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/SIBackButton"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back_button"
+        android:drawableTint="@color/darkBlue"
+        android:text=""
+        android:textColor="@color/lightBlue"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="Aruga"
+
+        android:textColor="@color/white"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.125" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="540dp"
+        android:background="@drawable/rounded_linearlayout"
+        android:backgroundTint="@color/white"
+        android:orientation="vertical"
+        android:padding="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sign in to your account"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/darkBlue"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
+            >
+        </TextView>
+
+
+
+
+
+
+
+        <EditText
+            android:id="@+id/SIName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:hint="Username"
+            android:drawableStart="@drawable/username_icon"
+            android:drawablePadding="10dp"
+            android:background="@drawable/edittext"
+            android:textColorHint="@color/lightBlue"
+            android:textColor="@color/darkBlue"
+            android:drawableTint="@color/lightBlue"
+            >
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/SIPassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:hint="Password"
+            android:background="@drawable/edittext"
+            android:textColorHint="@color/lightBlue"
+            android:textColor="@color/darkBlue"
+            android:drawableStart="@drawable/password_icon"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/lightBlue"
+            >
+
+        </EditText>
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/SILogin"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Login"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/button"
+            >
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <TextView
+            android:id="@+id/SUredirect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account? Sign up here"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/lightBlack"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
+            android:clickable="true"
+            android:focusable="true"
+            >
+        </TextView>
+
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
