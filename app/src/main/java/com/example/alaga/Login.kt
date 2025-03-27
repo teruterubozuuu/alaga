@@ -47,12 +47,20 @@ class Login : AppCompatActivity() {
 
             val role = dbHelper.authenticateUser(name, password)
 
+            val sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            editor.putString("username", name)
+            editor.putString("role", role)
+            editor.apply()
+
             if (role != null) {
-                Toast.makeText(this, "Login Successful as $role", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Login Successful as $name", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this,  Homepage::class.java))
             } else {
                 Toast.makeText(this, "Invalid Email or Password", Toast.LENGTH_SHORT).show()
             }
+
+
         }
     }
 }
