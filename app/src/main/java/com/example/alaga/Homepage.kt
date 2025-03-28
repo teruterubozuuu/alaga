@@ -76,6 +76,7 @@ class Homepage : AppCompatActivity() {
 
                 setOnClickListener {
                     when (buttonText) {
+                        "Personal Details" -> startActivity(Intent(this@Homepage, PersonalDetails::class.java))
                         "User Account Module" -> startActivity(Intent(this@Homepage, UserAccountModule::class.java))
                     }
                 }

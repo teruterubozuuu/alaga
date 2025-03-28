@@ -45,6 +45,7 @@ class Login : AppCompatActivity() {
             val name = nameInput.text.toString()
             val password = passwordInput.text.toString()
 
+
             val role = dbHelper.authenticateUser(name, password)
 
             val sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE)
