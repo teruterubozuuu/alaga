@@ -42,6 +42,13 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
             $COLUMN_PASSWORD TEXT UNIQUE,
             $COLUMN_ROLE TEXT)"""
         db.execSQL(createUsersTable)
+
+        db.execSQL("INSERT INTO $TABLE_USERS ($COLUMN_NAME, $COLUMN_EMAIL, $COLUMN_PASSWORD, $COLUMN_ROLE) VALUES" +
+        "('Joy', 'joy@gmail.com', 'joyjoy', 'Admin')," +
+        "('Jupi', 'jupi@gmail.com', 'jupi', 'Doctor')," +
+        "('Grace', 'grace@gmail.com', 'grace', 'Nurse')," +
+        "('George', 'george@gmail.com', 'george', 'Patient');")
+
     }
 
     fun printAllUsers() {
