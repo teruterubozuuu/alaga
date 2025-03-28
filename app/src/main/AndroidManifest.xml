@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Alaga"
         tools:targetApi="31">
         <activity
+            android:name=".UserAccountModule"
+            android:exported="false" />
+        <activity
+            android:name=".test"
+            android:exported="false" />
+        <activity
             android:name=".Homepage"
             android:exported="false" />
         <activity

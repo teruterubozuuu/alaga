@@ -73,6 +73,12 @@ class Homepage : AppCompatActivity() {
                 setTextColor(resources.getColor(R.color.lightBlack, null))
                 setBackgroundResource(R.drawable.homebtn)
                 setPadding(20, 50, 20, 50)
+
+                setOnClickListener {
+                    when (buttonText) {
+                        "User Account Module" -> startActivity(Intent(this@Homepage, UserAccountModule::class.java))
+                    }
+                }
             }
             // Set margin using LayoutParams
             val params = LinearLayout.LayoutParams(

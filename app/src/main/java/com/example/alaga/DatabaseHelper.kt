@@ -5,6 +5,8 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import com.yourpackage.models.User
+
 
 class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object {
@@ -44,10 +46,10 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         db.execSQL(createUsersTable)
 
         db.execSQL("INSERT INTO $TABLE_USERS ($COLUMN_NAME, $COLUMN_EMAIL, $COLUMN_PASSWORD, $COLUMN_ROLE) VALUES" +
-        "('Joy', 'joy@gmail.com', 'joyjoy', 'Admin')," +
-        "('Jupi', 'jupi@gmail.com', 'jupi', 'Doctor')," +
-        "('Grace', 'grace@gmail.com', 'grace', 'Nurse')," +
-        "('George', 'george@gmail.com', 'george', 'Patient');")
+        "('Joy', 'joy@gmail.com', 'joyjoy', 'Admin')," + // test admin role
+        "('Jupi', 'jupi@gmail.com', 'jupi', 'Doctor')," + // test doctor role
+        "('Grace', 'grace@gmail.com', 'grace', 'Nurse')," + // test nurse role
+        "('George', 'george@gmail.com', 'george', 'Patient');") // test patient role
 
     }
 
@@ -65,6 +67,59 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
             Log.d("Database", "ID: $id, Name: $name, Email: $email, Password: $password, Role: $role")
         }
         cursor.close()
+    }
+
+    // get all user for user account module
+    fun getAllUsers(role: String? = null): List<User> {
+        val userList = mutableListOf<User>()
+        val db = readableDatabase
+        val query = if (role == null || role == "All") {
+            "SELECT * FROM $TABLE_USERS ORDER BY $COLUMN_ID DESC"
+        } else {
+            "SELECT * FROM $TABLE_USERS WHERE $COLUMN_ROLE = ? ORDER BY $COLUMN_ID DESC"
+        }
+        val cursor = if (role == null || role == "All") {
+            db.rawQuery(query, null)
+        } else {
+            db.rawQuery(query, arrayOf(role))
+        }
+
+        while (cursor.moveToNext()) {
+            val user = User(
+                cursor.getInt(0),
+                cursor.getString(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4)
+            )
+            userList.add(user)
+        }
+
+        cursor.close()
+        db.close()
+        return userList
+    }
+
+    // update user for user account module
+
+    fun updateUser(id: Int, name: String, email: String, password: String, role: String) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_NAME, name)
+            put(COLUMN_EMAIL, email)
+            put(COLUMN_PASSWORD, password)
+            put(COLUMN_ROLE, role)
+        }
+        db.update(TABLE_USERS, values, "$COLUMN_ID = ?", arrayOf(id.toString()))
+        db.close()
+    }
+
+    // delete user for user account module
+
+    fun deleteUser(userId: Int) {
+        val db = writableDatabase
+        db.delete(TABLE_USERS, "$COLUMN_ID = ?", arrayOf(userId.toString()))
+        db.close()
     }
 
 
