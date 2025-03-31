@@ -11,7 +11,7 @@ import com.yourpackage.models.User
 class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object {
         private const val DATABASE_NAME = "medical_app.db"
-        private const val DATABASE_VERSION = 1
+        private const val DATABASE_VERSION = 3
 
         // User Table
         private const val TABLE_USERS = "users"
@@ -20,6 +20,23 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         private const val COLUMN_EMAIL = "email"
         private const val COLUMN_PASSWORD = "password"
         private const val COLUMN_ROLE = "role"
+
+        private const val TABLE_MEDICAL_HISTORY = "medical_history"
+        private const val COLUMN_MH_ID = "id"
+        private const val COLUMN_USER_ID = "user_id"
+        private const val COLUMN_PATIENT_NAME = "patient_name"
+        private const val COLUMN_AGE = "age"
+        private const val COLUMN_SEX = "sex"
+        private const val COLUMN_BIRTHDATE = "birthdate"
+        private const val COLUMN_PHONE = "phone"
+        private const val COLUMN_EMERGENCY = "emergency"
+        private const val COLUMN_OCCUPATION = "occupation"
+        private const val COLUMN_ISSUES = "issues"
+        private const val COLUMN_TREATMENT = "treatment"
+        private const val COLUMN_DOSAGE = "dosage"
+        private const val COLUMN_FREQUENCY = "frequency"
+        private const val COLUMN_PURPOSE = "purpose"
+        private const val COLUMN_NOTES = "notes"
     }
 
     fun insertUser(name: String, email: String, password: String, role: String): Boolean {
@@ -37,21 +54,85 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        val createUsersTable = """CREATE TABLE $TABLE_USERS (
-            $COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT,
-            $COLUMN_NAME TEXT,
-            $COLUMN_EMAIL TEXT,
-            $COLUMN_PASSWORD TEXT UNIQUE,
-            $COLUMN_ROLE TEXT)"""
-        db.execSQL(createUsersTable)
+        // Create users table
+        db.execSQL("""
+            CREATE TABLE $TABLE_USERS (
+                $COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COLUMN_NAME TEXT,
+                $COLUMN_EMAIL TEXT,
+                $COLUMN_PASSWORD TEXT UNIQUE,
+                $COLUMN_ROLE TEXT
+            )
+        """.trimIndent())
 
-        db.execSQL("INSERT INTO $TABLE_USERS ($COLUMN_NAME, $COLUMN_EMAIL, $COLUMN_PASSWORD, $COLUMN_ROLE) VALUES" +
-        "('Joy', 'joy@gmail.com', 'joyjoy', 'Admin')," + // test admin role
-        "('Jupi', 'jupi@gmail.com', 'jupi', 'Doctor')," + // test doctor role
-        "('Grace', 'grace@gmail.com', 'grace', 'Nurse')," + // test nurse role
-        "('George', 'george@gmail.com', 'george', 'Patient');") // test patient role
+        // Create medical_history table
+        db.execSQL("""
+            CREATE TABLE $TABLE_MEDICAL_HISTORY (
+                $COLUMN_MH_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COLUMN_USER_ID INTEGER,
+                $COLUMN_PATIENT_NAME TEXT,
+                $COLUMN_AGE INTEGER,
+                $COLUMN_SEX TEXT,
+                $COLUMN_BIRTHDATE TEXT,
+                $COLUMN_PHONE TEXT,
+                $COLUMN_EMERGENCY TEXT,
+                $COLUMN_OCCUPATION TEXT,
+                $COLUMN_ISSUES TEXT,
+                $COLUMN_TREATMENT TEXT,
+                $COLUMN_DOSAGE TEXT,
+                $COLUMN_FREQUENCY TEXT,
+                $COLUMN_PURPOSE TEXT,
+                $COLUMN_NOTES TEXT,
+                FOREIGN KEY ($COLUMN_USER_ID) REFERENCES $TABLE_USERS($COLUMN_ID) ON DELETE CASCADE
+            )
+        """.trimIndent())
 
+        // Insert test data
+        db.execSQL("""
+            INSERT INTO $TABLE_USERS 
+            ($COLUMN_NAME, $COLUMN_EMAIL, $COLUMN_PASSWORD, $COLUMN_ROLE) 
+            VALUES
+            ('Joy', 'joy@gmail.com', 'joyjoy', 'Admin'),
+            ('Jupi', 'jupi@gmail.com', 'jupi', 'Doctor'),
+            ('Grace', 'grace@gmail.com', 'grace', 'Nurse'),
+            ('George', 'george@gmail.com', 'george', 'Patient')
+        """.trimIndent())
     }
+
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        when (oldVersion) {
+            1 -> {
+                // Version 1 to 2: Create medical_history table
+                db.execSQL(
+                    """
+                    CREATE TABLE $TABLE_MEDICAL_HISTORY (
+                        $COLUMN_MH_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                        $COLUMN_USER_ID INTEGER,
+                        $COLUMN_PATIENT_NAME TEXT,
+                        $COLUMN_AGE INTEGER,
+                        $COLUMN_SEX TEXT,
+                        $COLUMN_BIRTHDATE TEXT,
+                        $COLUMN_PHONE TEXT,
+                        $COLUMN_EMERGENCY TEXT,
+                        $COLUMN_OCCUPATION TEXT,
+                        $COLUMN_ISSUES TEXT,
+                        $COLUMN_TREATMENT TEXT,
+                        $COLUMN_DOSAGE TEXT,
+                        $COLUMN_FREQUENCY TEXT,
+                        $COLUMN_PURPOSE TEXT,
+                        $COLUMN_NOTES TEXT,
+                        FOREIGN KEY ($COLUMN_USER_ID) REFERENCES $TABLE_USERS($COLUMN_ID) ON DELETE CASCADE
+                    )
+                """.trimIndent()
+                )
+            }
+
+            2 -> {
+                // Future upgrades would go here
+            }
+        }}
+
+
 
     fun printAllUsers() {
         val db = readableDatabase
@@ -123,28 +204,146 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
     }
 
 
+    fun authenticateUser(name: String, password: String): String? {
+        val db = readableDatabase
+        val query = """
+        SELECT $COLUMN_ROLE FROM $TABLE_USERS 
+        WHERE $COLUMN_NAME = ? AND $COLUMN_PASSWORD = ?
+    """
+        val cursor = db.rawQuery(query, arrayOf(name, password))
 
-    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS $TABLE_USERS")
-        onCreate(db)
+        return if (cursor.moveToFirst()) {
+            cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ROLE)).also {
+                cursor.close()
+            }
+        } else {
+            cursor.close()
+            null
+        }
     }
 
 
+    data class MedicalHistory(
+        val username: String,
+        val patientName: String,
+        val age: Int,
+        val sex: String,
+        val birthdate: String,
+        val phone: String,
+        val emergency: String,
+        val occupation: String,
+        val issues: String,
+        val treatment: String,
+        val dosage: String,
+        val frequency: String,
+        val purpose: String,
+        val notes: String
+    )
 
-    fun authenticateUser(name: String, password: String): String? {
-        val db = readableDatabase
-        val query = "SELECT $COLUMN_ROLE FROM $TABLE_USERS WHERE $COLUMN_NAME = ? AND $COLUMN_PASSWORD = ?"
-        val cursor = db.rawQuery("SELECT * FROM users WHERE name = ? AND password = ?", arrayOf(name, password))
+    // In DatabaseHelper class
+    fun insertMedicalHistoryByUsername(
+        username: String,
+        patientName: String,
+        age: Int,
+        sex: String,
+        birthdate: String,
+        phone: String,
+        emergency: String,
+        occupation: String,
+        issues: String,
+        treatment: String,
+        dosage: String,
+        frequency: String,
+        purpose: String,
+        notes: String
+    ): Boolean {
+        val userId = getUserIdByUsername(username)
+        if (userId == -1) return false
 
-        return if (cursor.moveToFirst()) {
-            val role = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ROLE))
-            cursor.close()
-            db.close()
-            role
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_USER_ID, userId)
+            put(COLUMN_PATIENT_NAME, patientName)
+            put(COLUMN_AGE, age)
+            put(COLUMN_SEX, sex)
+            put(COLUMN_BIRTHDATE, birthdate)
+            put(COLUMN_PHONE, phone)
+            put(COLUMN_EMERGENCY, emergency)
+            put(COLUMN_OCCUPATION, occupation)
+            put(COLUMN_ISSUES, issues)
+            put(COLUMN_TREATMENT, treatment)
+            put(COLUMN_DOSAGE, dosage)
+            put(COLUMN_FREQUENCY, frequency)
+            put(COLUMN_PURPOSE, purpose)
+            put(COLUMN_NOTES, notes)
+        }
+
+        // First try to update existing record
+        val rowsAffected = db.update(
+            TABLE_MEDICAL_HISTORY,
+            values,
+            "$COLUMN_USER_ID = ?",
+            arrayOf(userId.toString())
+        )
+
+        // If no existing record, insert new one
+        val result = if (rowsAffected == 0) {
+            db.insert(TABLE_MEDICAL_HISTORY, null, values)
         } else {
-            cursor.close()
-            db.close()
-            null
+            1L // Success
+        }
+
+        db.close()
+        return result != -1L
+    }
+
+    private fun getUserIdByUsername(username: String): Int {
+        val db = readableDatabase
+        db.query(
+            TABLE_USERS,
+            arrayOf(COLUMN_ID),
+            "$COLUMN_NAME = ?",
+            arrayOf(username),
+            null, null, null
+        ).use { cursor ->
+            return if (cursor.moveToFirst()) {
+                cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID))
+            } else {
+                -1
+            }
+        }
+    }
+
+    fun getMedicalHistoryByUsername(username: String): MedicalHistory? {
+        val db = readableDatabase
+        val query = """
+        SELECT mh.* FROM $TABLE_MEDICAL_HISTORY mh
+        JOIN $TABLE_USERS u ON mh.$COLUMN_USER_ID = u.$COLUMN_ID
+        WHERE u.$COLUMN_NAME = ?
+        LIMIT 1
+    """.trimIndent()
+
+        db.rawQuery(query, arrayOf(username)).use { cursor ->
+            return if (cursor.moveToFirst()) {
+                MedicalHistory(
+                    username = username,
+                    patientName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PATIENT_NAME)),
+                    age = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_AGE)),
+                    sex = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SEX)),
+                    birthdate = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_BIRTHDATE)),
+                    phone = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PHONE)),
+                    emergency = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_EMERGENCY)),
+                    occupation = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_OCCUPATION)),
+                    issues = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ISSUES)),
+                    treatment = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TREATMENT)),
+                    dosage = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DOSAGE)),
+                    frequency = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_FREQUENCY)),
+                    purpose = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PURPOSE)),
+                    notes = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOTES))
+                )
+            } else {
+                null
+            }
         }
     }
 

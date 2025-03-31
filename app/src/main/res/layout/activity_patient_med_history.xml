@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/back_button"
         android:drawableTint="@color/darkBlue"
-        android:text=""
+
         android:textColor="@color/lightBlue"
         android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent"
@@ -84,6 +84,7 @@
                 android:id="@+id/MHpatientName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Enter Patient Name"
                 android:background="@drawable/edittext"
                 android:padding="20dp"
                 android:layout_marginStart="10dp"
@@ -117,6 +118,7 @@
 
                     <EditText
                         android:id="@+id/MHage"
+                        android:hint="Enter Age"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edittext"
@@ -146,14 +148,15 @@
                         android:textSize="18sp"
                         android:layout_margin="10dp"/>
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/MHsex"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/edittext"
+                        android:prompt="@string/select_sex"
                         android:padding="20dp"
                         android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"/>
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/edittext"></Spinner>
                 </LinearLayout>
 
             </LinearLayout>
@@ -191,6 +194,7 @@
 
             <EditText
                 android:id="@+id/MHphoneNumber"
+                android:hint="Enter Phone Number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
@@ -214,7 +218,8 @@
                 android:background="@drawable/edittext"
                 android:padding="20dp"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"/>
+                android:layout_marginEnd="10dp"
+                android:hint="Enter emergency contact"/>
 
             <!-- Marital Status and Occupation Container -->
 
@@ -240,14 +245,15 @@
                         android:textSize="18sp"
                         android:layout_margin="10dp"/>
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/MHmarital"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/edittext"
+                        android:prompt="@string/select_status"
                         android:padding="20dp"
                         android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"/>
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/edittext"></Spinner>
                 </LinearLayout>
 
                 <!-- Space Between Fields -->
@@ -276,6 +282,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/edittext"
+                        android:hint="Occupation"
                         android:padding="20dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"/>

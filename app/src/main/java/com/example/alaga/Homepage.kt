@@ -78,9 +78,12 @@ class Homepage : AppCompatActivity() {
                     when (buttonText) {
                         "Personal Details" -> startActivity(Intent(this@Homepage, PersonalDetails::class.java))
                         "User Account Module" -> startActivity(Intent(this@Homepage, UserAccountModule::class.java))
-                        "Medical History (Patient)" -> startActivity(Intent(this@Homepage, PatientMedHistory::class.java))
-                    }
-                }
+                        "Medical History (Patient)" -> {
+                            val intent = Intent(this@Homepage, PatientMedHistory::class.java)
+                            // Pass the username explicitly
+                            intent.putExtra("username", getSharedPreferences("UserSession", MODE_PRIVATE).getString("username", ""))
+                            startActivity(intent)
+                        }}}
             }
             // Set margin using LayoutParams
             val params = LinearLayout.LayoutParams(
