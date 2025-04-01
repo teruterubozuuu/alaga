@@ -53,12 +53,16 @@ class Login : AppCompatActivity() {
             val role = dbHelper.authenticateUser(name, password)
 
             if (role != null) {
-                // Store session data
+                // Get the user ID from database
+                val userId = dbHelper.getUserIdByUsername(name)
+
+                // Store session data including user ID
                 val sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE)
                 with(sharedPreferences.edit()) {
                     putString("username", name)
                     putString("role", role)
-                    apply()  // Using apply() for asynchronous save
+                    putInt("userId", userId)  // Store the user ID
+                    apply()
                 }
 
                 Toast.makeText(this, "Login Successful as $role", Toast.LENGTH_SHORT).show()
