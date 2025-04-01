@@ -85,6 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Enter Patient Name"
+                android:textColor="@color/black"
                 android:background="@drawable/edittext"
                 android:padding="20dp"
                 android:layout_marginStart="10dp"
@@ -123,6 +124,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/edittext"
                         android:padding="20dp"
+                        android:textColor="@color/black"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"/>
                 </LinearLayout>
@@ -154,6 +156,7 @@
                         android:layout_height="wrap_content"
                         android:prompt="@string/select_sex"
                         android:padding="20dp"
+                        android:textColor="@color/black"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
                         android:background="@drawable/edittext"></Spinner>
@@ -176,6 +179,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
                 android:padding="20dp"
+                android:textColor="@color/black"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:focusable="false"
@@ -199,6 +203,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
                 android:padding="20dp"
+                android:textColor="@color/black"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"/>
 
@@ -217,6 +222,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
                 android:padding="20dp"
+                android:textColor="@color/black"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:hint="Enter emergency contact"/>
@@ -251,6 +257,7 @@
                         android:layout_height="wrap_content"
                         android:prompt="@string/select_status"
                         android:padding="20dp"
+                        android:textColor="@color/black"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
                         android:background="@drawable/edittext"></Spinner>
@@ -283,6 +290,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/edittext"
                         android:hint="Occupation"
+                        android:textColor="@color/black"
                         android:padding="20dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"/>
@@ -318,6 +326,7 @@
                         android:id="@+id/A1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textColor="@color/black"
                         android:text="No known medical conditions">
                     </CheckBox>
                 </LinearLayout>
@@ -337,6 +346,7 @@
                         android:id="@+id/A2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textColor="@color/black"
                         android:text="Heart Attack/Heart Disease">
                     </CheckBox>
                 </LinearLayout>
@@ -358,6 +368,7 @@
                         android:id="@+id/B1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textColor="@color/black"
                         android:text="Allergies (Drug, Food, Environmental)">
                     </CheckBox>
                 </LinearLayout>
@@ -376,6 +387,7 @@
                         android:id="@+id/B2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textColor="@color/black"
                         android:text="High Blood Pressure">
                     </CheckBox>
                 </LinearLayout>
@@ -397,6 +409,7 @@
                         android:id="@+id/C1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textColor="@color/black"
                         android:text="Anemia">
                     </CheckBox>
                 </LinearLayout>
@@ -415,6 +428,7 @@
                         android:id="@+id/C2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textColor="@color/black"
                         android:text="High Cholesterol">
                     </CheckBox>
                 </LinearLayout>
@@ -436,6 +450,7 @@
                         android:id="@+id/D1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textColor="@color/black"
                         android:text="Anxiety">
                     </CheckBox>
                 </LinearLayout>
@@ -454,6 +469,7 @@
                         android:id="@+id/D2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textColor="@color/black"
                         android:text="HIV/AIDS">
                     </CheckBox>
                 </LinearLayout>
@@ -475,6 +491,7 @@
                         android:id="@+id/E1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textColor="@color/black"
                         android:text="Asthma">
                     </CheckBox>
                 </LinearLayout>
@@ -493,6 +510,7 @@
                         android:id="@+id/E2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textColor="@color/black"
                         android:text="Kidney Disease/Kidney Stones">
                     </CheckBox>
                 </LinearLayout>
@@ -513,6 +531,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
+                android:textColor="@color/black"
                 android:padding="20dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"/>
@@ -543,6 +562,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
                 android:padding="20dp"
+                android:textColor="@color/black"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"/>
 
@@ -562,6 +582,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
                 android:padding="20dp"
+                android:textColor="@color/black"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"/>
 
@@ -581,6 +602,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
                 android:padding="20dp"
+                android:textColor="@color/black"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"/>
 
@@ -600,6 +622,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
                 android:padding="20dp"
+                android:textColor="@color/black"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"/>
 
@@ -619,6 +642,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/edittext"
                 android:padding="20dp"
+                android:textColor="@color/black"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"/>
 
