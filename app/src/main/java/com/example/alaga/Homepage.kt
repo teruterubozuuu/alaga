@@ -78,6 +78,7 @@ class Homepage : AppCompatActivity() {
                     when (buttonText) {
                         "Personal Details" -> startActivity(Intent(this@Homepage, PersonalDetails::class.java))
                         "User Account Module" -> startActivity(Intent(this@Homepage, UserAccountModule::class.java))
+                        "Patient Information Module" -> startActivity(Intent(this@Homepage, PatientAccountModule::class.java))
                         "Medical History (Patient)" -> {
                             val intent = Intent(this@Homepage, PatientMedHistory::class.java)
                             // Pass the username explicitly

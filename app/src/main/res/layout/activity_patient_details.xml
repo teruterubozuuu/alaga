@@ -1,0 +1,36 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/detailsPatientName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Patient Name" />
+
+    <TextView
+        android:id="@+id/detailsAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Age" />
+
+    <TextView
+        android:id="@+id/detailsSex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sex" />
+
+    <TextView
+        android:id="@+id/detailsBirthdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Birthdate" />
+
+    <TextView
+        android:id="@+id/detailsPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Phone Number" />
+</LinearLayout>

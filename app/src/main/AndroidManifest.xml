@@ -13,16 +13,20 @@
         android:theme="@style/Theme.Alaga"
         tools:targetApi="31">
         <activity
+            android:name=".PatientDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PatientAccountModule"
+            android:exported="false" />
+        <activity
             android:name=".PatientMedHistory"
             android:exported="false" />
-
         <activity
             android:name=".PersonalDetails"
             android:exported="false" />
         <activity
             android:name=".UserAccountModule"
             android:exported="false" />
-
         <activity
             android:name=".Homepage"
             android:exported="false" />
