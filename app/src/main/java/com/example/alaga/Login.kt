@@ -42,26 +42,35 @@ class Login : AppCompatActivity() {
         }
 
         loginButton.setOnClickListener {
-            val name = nameInput.text.toString()
-            val password = passwordInput.text.toString()
+            val name = nameInput.text.toString().trim()
+            val password = passwordInput.text.toString().trim()
 
+            if (name.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Please enter both username and password", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
 
             val role = dbHelper.authenticateUser(name, password)
 
-            val sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE)
-            val editor = sharedPreferences.edit()
-            editor.putString("username", name)
-            editor.putString("role", role)
-            editor.apply()
-
             if (role != null) {
-                Toast.makeText(this, "Login Successful as $name", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this,  Homepage::class.java))
+                // Store session data
+                val sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE)
+                with(sharedPreferences.edit()) {
+                    putString("username", name)
+                    putString("role", role)
+                    apply()  // Using apply() for asynchronous save
+                }
+
+                Toast.makeText(this, "Login Successful as $role", Toast.LENGTH_SHORT).show()
+
+                // Clear the back stack and launch homepage
+                val intent = Intent(this, Homepage::class.java).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
+                startActivity(intent)
             } else {
-                Toast.makeText(this, "Invalid Email or Password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Invalid Credentials", Toast.LENGTH_SHORT).show()
             }
-
-
         }
     }
 }

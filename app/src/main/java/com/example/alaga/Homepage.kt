@@ -62,7 +62,7 @@ class Homepage : AppCompatActivity() {
             "Admin" -> listOf("Personal Details", "User Account Module", "Patient Information Module")
             "Doctor" -> listOf("Personal Details", "Medical History", "Notes & Prescriptions", "Appointment History")
             "Nurse" -> listOf("Personal Details", "Medical History", "Notes & Prescriptions", "Appointment History", "Patient Appointment System")
-            "Patient" -> listOf("Personal Details", "Medical History", "Appointment History", "Patient Appointment System")
+            "Patient" -> listOf("Personal Details", "Medical History (Patient)", "Appointment History", "Patient Appointment System")
             else -> emptyList()
         }
 
@@ -78,8 +78,12 @@ class Homepage : AppCompatActivity() {
                     when (buttonText) {
                         "Personal Details" -> startActivity(Intent(this@Homepage, PersonalDetails::class.java))
                         "User Account Module" -> startActivity(Intent(this@Homepage, UserAccountModule::class.java))
-                    }
-                }
+                        "Medical History (Patient)" -> {
+                            val intent = Intent(this@Homepage, PatientMedHistory::class.java)
+                            // Pass the username explicitly
+                            intent.putExtra("username", getSharedPreferences("UserSession", MODE_PRIVATE).getString("username", ""))
+                            startActivity(intent)
+                        }}}
             }
             // Set margin using LayoutParams
             val params = LinearLayout.LayoutParams(
