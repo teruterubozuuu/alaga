@@ -150,6 +150,39 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         cursor.close()
     }
 
+    // get all patients for patient account module
+
+    fun getAllPatients(): List<MedicalHistory> {
+        val patientList = mutableListOf<MedicalHistory>()
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_MEDICAL_HISTORY ORDER BY $COLUMN_PATIENT_NAME ASC"
+
+        val cursor = db.rawQuery(query, null)
+        while (cursor.moveToNext()) {
+            val patient = MedicalHistory(
+                username = "",  // Not needed in this module
+                patientName = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PATIENT_NAME)),
+                age = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_AGE)),
+                sex = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SEX)),
+                birthdate = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_BIRTHDATE)),
+                phone = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PHONE)),
+                emergency = "",
+                occupation = "",
+                issues = "",
+                treatment = "",
+                dosage = "",
+                frequency = "",
+                purpose = "",
+                notes = ""
+            )
+            patientList.add(patient)
+        }
+        cursor.close()
+        db.close()
+        return patientList
+    }
+
+
     // get all user for user account module
     fun getAllUsers(role: String? = null): List<User> {
         val userList = mutableListOf<User>()
