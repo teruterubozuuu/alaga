@@ -11,7 +11,7 @@ import com.yourpackage.models.User
 class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
     companion object {
         private const val DATABASE_NAME = "medical_app.db"
-        private const val DATABASE_VERSION = 3
+        private const val DATABASE_VERSION = 4
 
         // User Table
         private const val TABLE_USERS = "users"
@@ -21,6 +21,7 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         private const val COLUMN_PASSWORD = "password"
         private const val COLUMN_ROLE = "role"
 
+        //Medical history table
         private const val TABLE_MEDICAL_HISTORY = "medical_history"
         private const val COLUMN_MH_ID = "id"
         private const val COLUMN_USER_ID = "user_id"
@@ -37,6 +38,16 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         private const val COLUMN_FREQUENCY = "frequency"
         private const val COLUMN_PURPOSE = "purpose"
         private const val COLUMN_NOTES = "notes"
+
+
+        private const val TABLE_APPOINTMENTS = "appointments"
+        private const val COLUMN_APPT_ID = "id"
+        private const val COLUMN_PATIENT_ID = "patient_id"
+        private const val COLUMN_DOCTOR_ID = "doctor_id"
+        private const val COLUMN_APPT_DATE = "appointment_date"
+        private const val COLUMN_STATUS = "status"
+
+
     }
 
     fun insertUser(name: String, email: String, password: String, role: String): Boolean {
@@ -87,6 +98,20 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
             )
         """.trimIndent())
 
+
+        db.execSQL("""
+        CREATE TABLE $TABLE_APPOINTMENTS (
+            $COLUMN_APPT_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+            $COLUMN_PATIENT_ID INTEGER,
+            $COLUMN_DOCTOR_ID INTEGER,
+            $COLUMN_APPT_DATE TEXT,
+            $COLUMN_STATUS TEXT DEFAULT 'Pending',
+            $COLUMN_NOTES TEXT,
+            FOREIGN KEY ($COLUMN_PATIENT_ID) REFERENCES $TABLE_USERS($COLUMN_ID),
+            FOREIGN KEY ($COLUMN_DOCTOR_ID) REFERENCES $TABLE_USERS($COLUMN_ID)
+        )
+    """.trimIndent())
+
         // Insert test data
         db.execSQL("""
             INSERT INTO $TABLE_USERS 
@@ -100,6 +125,11 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_APPOINTMENTS")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_MEDICAL_HISTORY")
+        db.execSQL("DROP TABLE IF EXISTS $TABLE_USERS")
+        onCreate(db)
+
         when (oldVersion) {
             1 -> {
                 // Version 1 to 2: Create medical_history table
@@ -129,6 +159,18 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
 
             2 -> {
                 // Future upgrades would go here
+                if (oldVersion < 3) {
+                    db.execSQL("""
+        CREATE TABLE IF NOT EXISTS appointments (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            patient_name TEXT,
+            doctor_name TEXT,
+            appointment_date TEXT,
+            status TEXT,
+            notes TEXT
+        )
+    """.trimIndent())
+                }
             }
         }}
 
@@ -330,7 +372,7 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         return result != -1L
     }
 
-    private fun getUserIdByUsername(username: String): Int {
+    public fun getUserIdByUsername(username: String): Int {
         val db = readableDatabase
         db.query(
             TABLE_USERS,
@@ -379,5 +421,53 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
             }
         }
     }
+
+    // Add this to your DatabaseHelper class
+// Replace the existing bookAppointment method with this one
+    fun bookAppointment(patientId: Int, doctorId: Int, date: String, notes: String = ""): Boolean {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_PATIENT_ID, patientId)
+            put(COLUMN_DOCTOR_ID, doctorId)
+            put(COLUMN_APPT_DATE, date)
+            put(COLUMN_NOTES, notes)
+            // Status defaults to 'Pending' as defined in table creation
+        }
+
+        val result = db.insert(TABLE_APPOINTMENTS, null, values)
+        db.close()
+        return result != -1L
+    }
+
+    fun hasAppointment(patientId: Int, doctorId: Int, date: String): Boolean {
+        val db = readableDatabase
+        val query = """
+        SELECT COUNT(*) FROM $TABLE_APPOINTMENTS 
+        WHERE $COLUMN_PATIENT_ID = ? 
+        AND $COLUMN_DOCTOR_ID = ? 
+        AND $COLUMN_APPT_DATE = ?
+    """.trimIndent()
+
+        db.rawQuery(query, arrayOf(patientId.toString(), doctorId.toString(), date)).use { cursor ->
+            return if (cursor.moveToFirst()) {
+                cursor.getInt(0) > 0
+            } else {
+                false
+            }
+        }
+    }
+
+    fun doesTableExist(tableName: String): Boolean {
+        val db = readableDatabase
+        val cursor = db.rawQuery("""
+        SELECT name FROM sqlite_master 
+        WHERE type='table' AND name=?
+    """.trimIndent(), arrayOf(tableName))
+        val exists = cursor.count > 0
+        cursor.close()
+        return exists
+    }
+
+
 
 }

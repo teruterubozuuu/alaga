@@ -84,7 +84,10 @@ class Homepage : AppCompatActivity() {
                             // Pass the username explicitly
                             intent.putExtra("username", getSharedPreferences("UserSession", MODE_PRIVATE).getString("username", ""))
                             startActivity(intent)
-                        }}}
+                        }
+                        "Patient Appointment System" -> startActivity(Intent(this@Homepage, PatientAppointment::class.java))
+                    }
+                }
             }
             // Set margin using LayoutParams
             val params = LinearLayout.LayoutParams(
