@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="16dp"
+    tools:context=".NurseAppointmentView"
     android:background="@color/darkBlue">
 
     <androidx.appcompat.widget.AppCompatButton
@@ -12,15 +13,15 @@
         android:layout_height="wrap_content"
         android:background="@drawable/back_button"
         android:drawableTint="@color/darkBlue"
-
         android:textColor="@color/lightBlue"
         android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="16dp"/>
 
+    <!-- Title or header -->
     <TextView
-        android:id="@+id/titleTextView"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
@@ -32,74 +33,76 @@
         app:layout_constraintTop_toBottomOf="@id/backButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"/>
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="540dp"
-        android:background="@drawable/rounded_linearlayout"
-        android:backgroundTint="@color/white"
-        android:orientation="vertical"
-        android:paddingLeft="30dp"
-        android:paddingTop="24dp"
-        android:paddingRight="30dp"
-        android:paddingBottom="24dp"
+    <ScrollView
+        android:id="@+id/scrollContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
 
-        <TextView
-            android:id="@+id/nameTextView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:background="@drawable/edittext"
-            android:fontFamily="sans-serif-black"
-            android:padding="8dp"
-            android:text="Name: "
-            android:textColor="@color/darkBlue"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleTextView" />
+            android:background="@drawable/rounded_linearlayout"
+            android:backgroundTint="@color/white"
+            android:orientation="vertical"
+            android:padding="24dp">
 
-        <TextView
-            android:id="@+id/emailTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-black"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/edittext"
-            android:padding="8dp"
-            android:text="Email: "
-            android:textColor="@color/darkBlue"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameTextView" />
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="36dp"
+                android:background="@drawable/edittext"
+                android:fontFamily="sans-serif-black"
+                android:padding="8dp"
+                android:text="Name: "
+                android:textColor="@color/darkBlue"
+                android:textSize="16sp"
+                />
 
-        <TextView
-            android:id="@+id/roleTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/edittext"
-            android:padding="8dp"
-            android:text="Role: "
-            android:textColor="@color/darkBlue"
-            android:fontFamily="sans-serif-black"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/emailTextView" />
+            <TextView
+                android:id="@+id/emailTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/edittext"
+                android:padding="8dp"
+                android:text="Email: "
+                android:textColor="@color/darkBlue"
+                android:textSize="16sp"
+                 />
+
+            <TextView
+                android:id="@+id/roleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/edittext"
+                android:padding="8dp"
+                android:text="Role: "
+                android:textColor="@color/darkBlue"
+                android:fontFamily="sans-serif-black"
+                android:textSize="16sp"
+                />
 
 
-    </LinearLayout>
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+
+
 
 
 
