@@ -461,8 +461,6 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         }
     }
 
-    // Add this to your DatabaseHelper class
-// Replace the existing bookAppointment method with this one
     fun bookAppointment(patientId: Int, doctorId: Int, date: String, notes: String = ""): Boolean {
         val db = writableDatabase
         val values = ContentValues().apply {
@@ -470,7 +468,6 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
             put(COLUMN_DOCTOR_ID, doctorId)
             put(COLUMN_APPT_DATE, date)
             put(COLUMN_NOTES, notes)
-            // Status defaults to 'Pending' as defined in table creation
         }
 
         val result = db.insert(TABLE_APPOINTMENTS, null, values)
@@ -496,17 +493,18 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         }
     }
 
-    fun doesTableExist(tableName: String): Boolean {
-        val db = readableDatabase
-        val cursor = db.rawQuery("""
-        SELECT name FROM sqlite_master 
-        WHERE type='table' AND name=?
-    """.trimIndent(), arrayOf(tableName))
-        val exists = cursor.count > 0
-        cursor.close()
-        return exists
-    }
 
+    fun getUserNameById(userId: Int): String {
+        val db = readableDatabase
+        val query = "SELECT $COLUMN_NAME FROM $TABLE_USERS WHERE $COLUMN_ID = ?"
+        db.rawQuery(query, arrayOf(userId.toString())).use { cursor ->
+            return if (cursor.moveToFirst()) {
+                cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME))
+            } else {
+                "Unknown"
+            }
+        }
+    }
 
 
 }

@@ -33,10 +33,12 @@ class AppointmentAdapter(private val appointmentList: List<Appointment>, private
 
     override fun onBindViewHolder(holder: AppointmentAdapter.AppointmentViewHolder, position: Int) {
         val appointment = appointmentList[position]
+
         holder.txtPatient.text = "Patient ID: ${appointment.patientId}"
         holder.txtDoctor.text = "Doctor ID: ${appointment.doctorId}"
         holder.txtDate.text = "Date: ${appointment.appointmentDate}"
         holder.txtStatus.text = "Status: ${appointment.status}"
+
 
         if (appointment.status == "Scheduled") {
             holder.txtStatus.visibility = View.VISIBLE
