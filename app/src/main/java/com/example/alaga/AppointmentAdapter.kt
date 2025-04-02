@@ -38,6 +38,14 @@ class AppointmentAdapter(private val appointmentList: List<Appointment>, private
         holder.txtDate.text = "Date: ${appointment.appointmentDate}"
         holder.txtStatus.text = "Status: ${appointment.status}"
 
+        if (appointment.status == "Scheduled") {
+            holder.txtStatus.visibility = View.VISIBLE
+            holder.btnUpdate.visibility = View.VISIBLE
+        } else {
+            holder.txtStatus.visibility = View.GONE
+            holder.btnUpdate.visibility = View.GONE
+        }
+
         holder.btnUpdate.setOnClickListener {
             onUpdateStatus(appointment)
         }

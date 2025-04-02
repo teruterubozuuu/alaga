@@ -175,6 +175,7 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
             }
         }}
 
+
     // get all appointments list
 
     fun getAllAppointments(): List<Appointment> {
