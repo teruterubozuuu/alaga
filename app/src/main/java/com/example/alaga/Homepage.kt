@@ -60,8 +60,8 @@ class Homepage : AppCompatActivity() {
 
         val roleButtons = when (role) {
             "Admin" -> listOf("Personal Details", "Appointment History", "User Account Module", "Patient Information Module")
-            "Doctor" -> listOf("Personal Details", "My Patients", "Appointment History")
-            "Nurse" -> listOf("Personal Details", "View Patients", "Appointment History", "View Appointments")
+            "Doctor" -> listOf("Personal Details", "Patient List", "Appointment History")
+            "Nurse" -> listOf("Personal Details", "Patients List", "View Appointments")
             "Patient" -> listOf("Personal Details", "Medical History (Patient)", "Appointment History", "Patient Appointment System")
             else -> emptyList()
         }
