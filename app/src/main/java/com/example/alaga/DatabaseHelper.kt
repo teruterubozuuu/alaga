@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import com.example.alaga.models.Appointment
 import com.yourpackage.models.User
 
 
@@ -173,6 +174,43 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
                 }
             }
         }}
+
+    // get all appointments list
+
+    fun getAllAppointments(): List<Appointment> {
+        val appointmentList = mutableListOf<Appointment>()
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_APPOINTMENTS ORDER BY $COLUMN_APPT_DATE ASC"
+
+        val cursor = db.rawQuery(query, null)
+        while (cursor.moveToNext()) {
+            val appointment = Appointment(
+                id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_APPT_ID)),
+                patientId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_PATIENT_ID)),
+                doctorId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_DOCTOR_ID)),
+                appointmentDate = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_APPT_DATE)),
+                status = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STATUS)),
+                notes = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOTES))
+            )
+            appointmentList.add(appointment)
+        }
+        cursor.close()
+        db.close()
+        return appointmentList
+    }
+
+
+    // update appointment status for nurses
+
+    fun updateAppointmentStatus(appointmentId: Int, newStatus: String) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_STATUS, newStatus)
+        }
+        db.update(TABLE_APPOINTMENTS, values, "$COLUMN_ID=?", arrayOf(appointmentId.toString()))
+    }
+
+
 
 
 
