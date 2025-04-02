@@ -4,7 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.alaga.R
 import com.example.alaga.models.Appointment
@@ -14,16 +16,18 @@ import java.util.Locale
 class PatientAppointmentAdapter(
     private val context: Context,
     private val appointments: List<Appointment>,
-    private val onItemClick: (Appointment) -> Unit
+    private val onCancel: (Appointment) -> Unit,
+    private val onReschedule: (Appointment) -> Unit
 ) : RecyclerView.Adapter<PatientAppointmentAdapter.AppointmentViewHolder>() {
 
     private val dbHelper: DatabaseHelper by lazy { DatabaseHelper(context) }
 
     class AppointmentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val patientName: TextView = itemView.findViewById(R.id.patientNameTextView)
         val doctorName: TextView = itemView.findViewById(R.id.doctorNameTextView)
         val date: TextView = itemView.findViewById(R.id.dateTextView)
         val status: TextView = itemView.findViewById(R.id.statusTextView)
+        val cancelBtn: Button = itemView.findViewById(R.id.cancelButton)
+        val rescheduleBtn: Button = itemView.findViewById(R.id.rescheduleButton)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppointmentViewHolder {
@@ -34,16 +38,11 @@ class PatientAppointmentAdapter(
 
     override fun onBindViewHolder(holder: AppointmentViewHolder, position: Int) {
         val appointment = appointments[position]
-        val patientName = dbHelper.getUserNameById(appointment.patientId)
         val doctorName = dbHelper.getUserNameById(appointment.doctorId)
 
-        holder.patientName.text = "Patient: $patientName"
         holder.doctorName.text = "Doctor: $doctorName"
-        // OR if you want IDs instead:
-        // holder.patientName.text = "Patient ID: ${appointment.patientId}"
-        // holder.doctorName.text = "Doctor ID: ${appointment.doctorId}"
 
-        // Changes
+        // Format the date
         val formattedDate = try {
             val inputFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
             val outputFormat = SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault())
@@ -56,8 +55,21 @@ class PatientAppointmentAdapter(
         holder.date.text = formattedDate
         holder.status.text = appointment.status
 
-        holder.itemView.setOnClickListener {
-            onItemClick(appointment)
+        // Only show buttons for pending appointments
+        if (appointment.status == "Pending") {
+            holder.cancelBtn.visibility = View.VISIBLE
+            holder.rescheduleBtn.visibility = View.VISIBLE
+        } else {
+            holder.cancelBtn.visibility = View.GONE
+            holder.rescheduleBtn.visibility = View.GONE
+        }
+
+        holder.cancelBtn.setOnClickListener {
+            onCancel(appointment)
+        }
+
+        holder.rescheduleBtn.setOnClickListener {
+            onReschedule(appointment)
         }
     }
 

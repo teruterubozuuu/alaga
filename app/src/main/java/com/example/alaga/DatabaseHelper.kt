@@ -203,12 +203,19 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
 
     // update appointment status for nurses
 
-    fun updateAppointmentStatus(appointmentId: Int, newStatus: String) {
+    fun updateAppointmentStatus(appointmentId: Int, newStatus: String): Boolean {
         val db = writableDatabase
         val values = ContentValues().apply {
             put(COLUMN_STATUS, newStatus)
         }
-        db.update(TABLE_APPOINTMENTS, values, "$COLUMN_ID=?", arrayOf(appointmentId.toString()))
+        val rowsAffected = db.update(
+            TABLE_APPOINTMENTS,
+            values,
+            "$COLUMN_APPT_ID=?",
+            arrayOf(appointmentId.toString())
+        )
+        db.close()
+        return rowsAffected > 0
     }
 
 
@@ -502,6 +509,63 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
                 cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME))
             } else {
                 "Unknown"
+            }
+        }
+    }
+
+
+
+    fun updateAppointmentDate(appointmentId: Int, newDate: String): Boolean {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_APPT_DATE, newDate)
+        }
+        val rowsAffected = db.update(
+            TABLE_APPOINTMENTS,
+            values,
+            "$COLUMN_APPT_ID=?",
+            arrayOf(appointmentId.toString()))
+        db.close()
+        return rowsAffected > 0
+    }
+
+    fun isDoctorAvailable(doctorId: Int, date: String): Boolean {
+        val db = readableDatabase
+        val query = """
+        SELECT COUNT(*) FROM $TABLE_APPOINTMENTS 
+        WHERE $COLUMN_DOCTOR_ID = ? 
+        AND $COLUMN_APPT_DATE = ?
+        AND $COLUMN_STATUS != 'Cancelled'
+    """.trimIndent()
+
+        db.rawQuery(query, arrayOf(doctorId.toString(), date)).use { cursor ->
+            return if (cursor.moveToFirst()) {
+                cursor.getInt(0) == 0
+            } else {
+                true
+            }
+        }
+    }
+
+    fun getAppointmentById(appointmentId: Int): Appointment? {
+        val db = readableDatabase
+        val query = """
+        SELECT * FROM $TABLE_APPOINTMENTS 
+        WHERE $COLUMN_APPT_ID = ?
+    """.trimIndent()
+
+        db.rawQuery(query, arrayOf(appointmentId.toString())).use { cursor ->
+            return if (cursor.moveToFirst()) {
+                Appointment(
+                    id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_APPT_ID)),
+                    patientId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_PATIENT_ID)),
+                    doctorId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_DOCTOR_ID)),
+                    appointmentDate = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_APPT_DATE)),
+                    status = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STATUS)),
+                    notes = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOTES))
+                )
+            } else {
+                null
             }
         }
     }
