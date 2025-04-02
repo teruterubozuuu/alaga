@@ -43,7 +43,7 @@ class PatientAppointmentAdapter(
         // holder.patientName.text = "Patient ID: ${appointment.patientId}"
         // holder.doctorName.text = "Doctor ID: ${appointment.doctorId}"
 
-        // Format the date
+        // Changes
         val formattedDate = try {
             val inputFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
             val outputFormat = SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault())
