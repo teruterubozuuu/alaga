@@ -1,10 +1,12 @@
 package com.example.alaga
 
 import UserAdapter
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import androidx.activity.enableEdgeToEdge
@@ -42,6 +44,12 @@ class UserAccountModule : AppCompatActivity(), UserAdapter.UserClickListener {
         }
 
         loadUsers("All")
+
+        findViewById<Button>(R.id.backButton).setOnClickListener {
+            val intent = Intent(this, Homepage::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
     private fun loadUsers(role: String) {
@@ -86,6 +94,8 @@ class UserAccountModule : AppCompatActivity(), UserAdapter.UserClickListener {
             .setNegativeButton("Cancel", null)
             .show()
     }
+
+
 
     override fun onEdit(user: User) { showEditDialog(user) }
     override fun onDelete(userId: Int) { dbHelper.deleteUser(userId); loadUsers(spinnerRole.selectedItem.toString()) }
