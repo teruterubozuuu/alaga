@@ -62,7 +62,7 @@ class Homepage : AppCompatActivity() {
             "Admin" -> listOf("Personal Details", "Appointment History", "User Account Module", "Patient Information Module")
             "Doctor" -> listOf("Personal Details", "Patient List", "Appointment History")
             "Nurse" -> listOf("Personal Details", "Patients List", "View Appointments")
-            "Patient" -> listOf("Personal Details", "Medical History (Patient)", "Appointment History", "Patient Appointment System")
+            "Patient" -> listOf("Personal Details", "Medical History (Patient)", "Appointment History", "Patient Appointment System", "AI Symptom Checker")
             else -> emptyList()
         }
 
@@ -88,6 +88,7 @@ class Homepage : AppCompatActivity() {
                         "Patient Appointment System" -> startActivity(Intent(this@Homepage, PatientAppointment::class.java))
                         "View Appointments" -> startActivity(Intent(this@Homepage, NurseAppointmentView::class.java))
                         "Appointment History" -> startActivity(Intent(this@Homepage, AppointmentHistory::class.java))
+                        "AI Symptom Checker" -> startActivity(Intent(this@Homepage, SymptomCheckerActivity::class.java))
                     }
                 }
             }
