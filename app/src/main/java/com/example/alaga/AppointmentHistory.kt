@@ -34,7 +34,6 @@ class AppointmentHistory : AppCompatActivity() {
 
         loadAppointments()
     }
-
     private fun loadAppointments() {
         val sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE)
         val currentUserId = sharedPreferences.getInt("userId", -1)
@@ -60,24 +59,33 @@ class AppointmentHistory : AppCompatActivity() {
         val adapter = PatientAppointmentAdapter(
             context = this,
             appointments = appointments,
+            userRole = currentUserRole,
             onCancel = { appointment ->
                 cancelAppointment(appointment)
             },
             onReschedule = { appointment ->
                 rescheduleAppointment(appointment)
+            },
+            onAccept = { appointment ->
+                acceptAppointment(appointment)
             }
         )
         recyclerView.adapter = adapter
     }
 
+    private fun acceptAppointment(appointment: Appointment) {
+        dbHelper.updateAppointmentStatus(appointment.id, "Accepted")
+        Toast.makeText(this, "Appointment accepted", Toast.LENGTH_SHORT).show()
+        loadAppointments()
+    }
+
     private fun cancelAppointment(appointment: Appointment) {
         dbHelper.updateAppointmentStatus(appointment.id, "Cancelled")
         Toast.makeText(this, "Appointment cancelled", Toast.LENGTH_SHORT).show()
-        loadAppointments() // Refresh the list
+        loadAppointments()
     }
 
     private fun rescheduleAppointment(appointment: Appointment) {
-        // Start reschedule activity with appointment details
         val intent = Intent(this, RescheduleActivity::class.java).apply {
             putExtra("APPOINTMENT_ID", appointment.id)
             putExtra("CURRENT_DATE", appointment.appointmentDate)

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.alaga.R
 import com.example.alaga.models.Appointment
@@ -16,18 +15,21 @@ import java.util.Locale
 class PatientAppointmentAdapter(
     private val context: Context,
     private val appointments: List<Appointment>,
+    private val userRole: String,
     private val onCancel: (Appointment) -> Unit,
-    private val onReschedule: (Appointment) -> Unit
+    private val onReschedule: (Appointment) -> Unit,
+    private val onAccept: (Appointment) -> Unit // New callback for accept action
 ) : RecyclerView.Adapter<PatientAppointmentAdapter.AppointmentViewHolder>() {
 
     private val dbHelper: DatabaseHelper by lazy { DatabaseHelper(context) }
 
     class AppointmentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val doctorName: TextView = itemView.findViewById(R.id.doctorNameTextView)
+        val personName: TextView = itemView.findViewById(R.id.doctorNameTextView)
         val date: TextView = itemView.findViewById(R.id.dateTextView)
         val status: TextView = itemView.findViewById(R.id.statusTextView)
         val cancelBtn: Button = itemView.findViewById(R.id.cancelButton)
         val rescheduleBtn: Button = itemView.findViewById(R.id.rescheduleButton)
+        val acceptBtn: Button = itemView.findViewById(R.id.acceptButton) // New accept button
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppointmentViewHolder {
@@ -38,11 +40,23 @@ class PatientAppointmentAdapter(
 
     override fun onBindViewHolder(holder: AppointmentViewHolder, position: Int) {
         val appointment = appointments[position]
-        val doctorName = dbHelper.getUserNameById(appointment.doctorId)
 
-        holder.doctorName.text = "Doctor: $doctorName"
+        when (userRole) {
+            "Doctor" -> {
+                val patientName = dbHelper.getUserNameById(appointment.patientId)
+                holder.personName.text = "Patient: $patientName"
+            }
+            "Patient" -> {
+                val doctorName = dbHelper.getUserNameById(appointment.doctorId)
+                holder.personName.text = "Doctor: $doctorName"
+            }
+            else -> {
+                val patientName = dbHelper.getUserNameById(appointment.patientId)
+                val doctorName = dbHelper.getUserNameById(appointment.doctorId)
+                holder.personName.text = "Dr. $doctorName → $patientName"
+            }
+        }
 
-        // Format the date
         val formattedDate = try {
             val inputFormat = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
             val outputFormat = SimpleDateFormat("MMMM dd, yyyy", Locale.getDefault())
@@ -55,13 +69,29 @@ class PatientAppointmentAdapter(
         holder.date.text = formattedDate
         holder.status.text = appointment.status
 
-        // Only show buttons for pending appointments
+
         if (appointment.status == "Pending") {
-            holder.cancelBtn.visibility = View.VISIBLE
-            holder.rescheduleBtn.visibility = View.VISIBLE
+            when (userRole) {
+                "Patient" -> {
+                    holder.cancelBtn.visibility = View.VISIBLE
+                    holder.rescheduleBtn.visibility = View.VISIBLE
+                    holder.acceptBtn.visibility = View.GONE
+                }
+                "Doctor" -> {
+                    holder.acceptBtn.visibility = View.VISIBLE
+                    holder.cancelBtn.visibility = View.VISIBLE
+                    holder.rescheduleBtn.visibility = View.VISIBLE
+                }
+                else -> {
+                    holder.cancelBtn.visibility = View.GONE
+                    holder.rescheduleBtn.visibility = View.GONE
+                    holder.acceptBtn.visibility = View.GONE
+                }
+            }
         } else {
             holder.cancelBtn.visibility = View.GONE
             holder.rescheduleBtn.visibility = View.GONE
+            holder.acceptBtn.visibility = View.GONE
         }
 
         holder.cancelBtn.setOnClickListener {
@@ -70,6 +100,10 @@ class PatientAppointmentAdapter(
 
         holder.rescheduleBtn.setOnClickListener {
             onReschedule(appointment)
+        }
+
+        holder.acceptBtn.setOnClickListener {
+            onAccept(appointment)
         }
     }
 
