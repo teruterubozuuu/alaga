@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Alaga"
         tools:targetApi="31">
         <activity
+            android:name=".RescheduleActivity"
+            android:exported="false" />
+        <activity
             android:name=".AppointmentHistory"
             android:exported="false" />
         <activity

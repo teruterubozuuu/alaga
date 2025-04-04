@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RescheduleActivity"
+    android:background="@color/darkBlue">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back_button"
+        android:drawableTint="@color/darkBlue"
+        android:textColor="@color/lightBlue"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"/>
+
+    <!-- Title or header -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="Reschedule Appointment"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/backButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <ScrollView
+        android:id="@+id/scrollContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_linearlayout"
+            android:backgroundTint="@color/white"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <!-- Current Appointment Info -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Current Appointment"
+                android:textColor="@color/darkBlue"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/currentDoctorText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/darkBlue"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:id="@+id/currentDateText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/darkBlue"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/lightBlue"
+                android:layout_marginVertical="16dp"/>
+
+            <!-- New Date Selection -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select New Date"
+                android:textColor="@color/darkBlue"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/dateEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Select new date"
+                android:inputType="none"
+                android:focusable="false"
+                android:clickable="true"
+                android:textColor="@color/darkBlue"
+                android:background="@drawable/edit_text_border"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Reschedule Button -->
+            <Button
+                android:id="@+id/rescheduleButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reschedule Appointment"
+                android:textColor="@color/white"
+                android:background="@drawable/button"
+                android:textAllCaps="false"
+                android:layout_marginTop="16dp"
+                style="@style/Widget.AppCompat.Button.Colored"/>
+
+            <!-- Status Message -->
+            <TextView
+                android:id="@+id/statusMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/lightBlack"
+                android:visibility="gone"
+                android:layout_marginTop="8dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
