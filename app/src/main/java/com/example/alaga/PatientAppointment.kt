@@ -37,45 +37,35 @@ class PatientAppointment : AppCompatActivity() {
             insets
         }
 
-        // Initialize database helper and shared preferences
         dbHelper = DatabaseHelper(this)
-        // Initialize shared preferences - use "UserSession" to match login
+
         sharedPreferences = getSharedPreferences("UserSession", MODE_PRIVATE)
 
-        // Get current patient info
         patientName = sharedPreferences.getString("username", "") ?: ""
         patientId = sharedPreferences.getInt("userId", -1)
 
-        // If we still don't have an ID (shouldn't happen if login worked properly)
         if (patientId == -1 && patientName.isNotEmpty()) {
             patientId = dbHelper.getUserIdByUsername(patientName)
             if (patientId != -1) {
-                // Store it for future use
                 sharedPreferences.edit().putInt("userId", patientId).apply()
             }
         }
 
-
-        // Initialize views
         doctorSpinner = findViewById(R.id.doctorSpinner)
         dateEditText = findViewById(R.id.dateEditText)
         bookButton = findViewById(R.id.bookAppointmentButton)
         backButton = findViewById(R.id.backButton)
 
-        // Load doctors into spinner
         loadDoctors()
 
-        // Set up date picker
         dateEditText.setOnClickListener {
             showDatePicker()
         }
 
-        // Book appointment button click
         bookButton.setOnClickListener {
             bookAppointment()
         }
 
-        // Back button click
         backButton.setOnClickListener {
             finish()
         }
@@ -84,17 +74,14 @@ class PatientAppointment : AppCompatActivity() {
     }
 
     private fun loadDoctors() {
-        // Get all users with role "Doctor"
         val doctors = dbHelper.getAllUsers("Doctor")
         if (doctors.isEmpty()) {
             Toast.makeText(this, "No doctors available", Toast.LENGTH_SHORT).show()
             return
         }
 
-        // Create a list of doctor names with their IDs for reference
         val doctorNames = doctors.map { it.name }
 
-        // Create adapter for spinner
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, doctorNames)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         doctorSpinner.adapter = adapter
@@ -119,7 +106,6 @@ class PatientAppointment : AppCompatActivity() {
             year, month, day
         )
 
-        // Set minimum date to today
         datePickerDialog.datePicker.minDate = calendar.timeInMillis
         datePickerDialog.show()
     }

@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Alaga"
         tools:targetApi="31">
         <activity
+            android:name=".AppointmentHistory"
+            android:exported="false" />
+        <activity
+            android:name=".NurseAppointmentView"
+            android:exported="false" />
+        <activity
             android:name=".PatientAppointment"
             android:exported="false" />
         <activity

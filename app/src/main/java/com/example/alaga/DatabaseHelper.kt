@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
+import com.example.alaga.models.Appointment
 import com.yourpackage.models.User
 
 
@@ -173,6 +174,44 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
                 }
             }
         }}
+
+
+    // get all appointments list
+
+    fun getAllAppointments(): List<Appointment> {
+        val appointmentList = mutableListOf<Appointment>()
+        val db = readableDatabase
+        val query = "SELECT * FROM $TABLE_APPOINTMENTS ORDER BY $COLUMN_APPT_DATE ASC"
+
+        val cursor = db.rawQuery(query, null)
+        while (cursor.moveToNext()) {
+            val appointment = Appointment(
+                id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_APPT_ID)),
+                patientId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_PATIENT_ID)),
+                doctorId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_DOCTOR_ID)),
+                appointmentDate = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_APPT_DATE)),
+                status = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_STATUS)),
+                notes = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOTES))
+            )
+            appointmentList.add(appointment)
+        }
+        cursor.close()
+        db.close()
+        return appointmentList
+    }
+
+
+    // update appointment status for nurses
+
+    fun updateAppointmentStatus(appointmentId: Int, newStatus: String) {
+        val db = writableDatabase
+        val values = ContentValues().apply {
+            put(COLUMN_STATUS, newStatus)
+        }
+        db.update(TABLE_APPOINTMENTS, values, "$COLUMN_ID=?", arrayOf(appointmentId.toString()))
+    }
+
+
 
 
 
@@ -422,8 +461,6 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         }
     }
 
-    // Add this to your DatabaseHelper class
-// Replace the existing bookAppointment method with this one
     fun bookAppointment(patientId: Int, doctorId: Int, date: String, notes: String = ""): Boolean {
         val db = writableDatabase
         val values = ContentValues().apply {
@@ -431,7 +468,6 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
             put(COLUMN_DOCTOR_ID, doctorId)
             put(COLUMN_APPT_DATE, date)
             put(COLUMN_NOTES, notes)
-            // Status defaults to 'Pending' as defined in table creation
         }
 
         val result = db.insert(TABLE_APPOINTMENTS, null, values)
@@ -457,17 +493,18 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         }
     }
 
-    fun doesTableExist(tableName: String): Boolean {
-        val db = readableDatabase
-        val cursor = db.rawQuery("""
-        SELECT name FROM sqlite_master 
-        WHERE type='table' AND name=?
-    """.trimIndent(), arrayOf(tableName))
-        val exists = cursor.count > 0
-        cursor.close()
-        return exists
-    }
 
+    fun getUserNameById(userId: Int): String {
+        val db = readableDatabase
+        val query = "SELECT $COLUMN_NAME FROM $TABLE_USERS WHERE $COLUMN_ID = ?"
+        db.rawQuery(query, arrayOf(userId.toString())).use { cursor ->
+            return if (cursor.moveToFirst()) {
+                cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME))
+            } else {
+                "Unknown"
+            }
+        }
+    }
 
 
 }

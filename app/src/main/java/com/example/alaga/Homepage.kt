@@ -59,9 +59,9 @@ class Homepage : AppCompatActivity() {
 
 
         val roleButtons = when (role) {
-            "Admin" -> listOf("Personal Details", "User Account Module", "Patient Information Module")
-            "Doctor" -> listOf("Personal Details", "Medical History", "Notes & Prescriptions", "Appointment History")
-            "Nurse" -> listOf("Personal Details", "Medical History", "Notes & Prescriptions", "Appointment History", "Patient Appointment System")
+            "Admin" -> listOf("Personal Details", "Appointment History", "User Account Module", "Patient Information Module")
+            "Doctor" -> listOf("Personal Details", "Patient List", "Appointment History")
+            "Nurse" -> listOf("Personal Details", "Patients List", "View Appointments")
             "Patient" -> listOf("Personal Details", "Medical History (Patient)", "Appointment History", "Patient Appointment System")
             else -> emptyList()
         }
@@ -86,6 +86,8 @@ class Homepage : AppCompatActivity() {
                             startActivity(intent)
                         }
                         "Patient Appointment System" -> startActivity(Intent(this@Homepage, PatientAppointment::class.java))
+                        "View Appointments" -> startActivity(Intent(this@Homepage, NurseAppointmentView::class.java))
+                        "Appointment History" -> startActivity(Intent(this@Homepage, AppointmentHistory::class.java))
                     }
                 }
             }

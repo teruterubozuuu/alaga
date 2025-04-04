@@ -107,6 +107,7 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:hint="Password"
+            android:inputType="textPassword"
             android:background="@drawable/edittext"
             android:textColorHint="@color/lightBlue"
             android:textColor="@color/darkBlue"
