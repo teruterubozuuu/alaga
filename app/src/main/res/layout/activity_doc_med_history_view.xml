@@ -1,0 +1,667 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DocMedHistoryView"
+    android:background="@color/darkBlue">
+
+    <!-- Back Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/backButton"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/back_button"
+        android:drawableTint="@color/darkBlue"
+
+        android:textColor="@color/lightBlue"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="16dp"/>
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="Medical History"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/backButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Scrollable Content -->
+    <ScrollView
+        android:id="@+id/scrollContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <!-- Inside ScrollView, add a LinearLayout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_linearlayout"
+            android:backgroundTint="@color/white"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Patient Information"
+                android:textColor="@color/darkBlue"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <!-- Add More TextViews -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Patient Name"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_margin="10dp"/>
+
+            <EditText
+                android:id="@+id/MHpatientName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Patient Name"
+                android:textColor="@color/black"
+                android:background="@drawable/edittext"
+                android:padding="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp">
+
+            </EditText>
+
+            <!-- Age and Sex Container -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <!-- Age Field -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Age"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:layout_margin="10dp"/>
+
+                    <EditText
+                        android:id="@+id/MHage"
+                        android:hint="Enter Age"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext"
+                        android:padding="20dp"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"/>
+                </LinearLayout>
+
+                <!-- Space Between Fields -->
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content"/>
+
+                <!-- Sex Field -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sex"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:layout_margin="10dp"/>
+
+                    <Spinner
+                        android:id="@+id/MHsex"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:prompt="@string/select_sex"
+                        android:padding="20dp"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/edittext"></Spinner>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Birthdate"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_margin="10dp"/>
+
+            <EditText
+                android:id="@+id/MHbirthdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:focusable="false"
+                android:clickable="true"
+                android:hint="Select Birthdate"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone Number"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_margin="10dp"/>
+
+            <EditText
+                android:id="@+id/MHphoneNumber"
+                android:hint="Enter Phone Number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Emergency Contact Number"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_margin="10dp"/>
+
+            <EditText
+                android:id="@+id/MHemergency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:hint="Enter emergency contact"/>
+
+            <!-- Marital Status and Occupation Container -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <!-- Martial Status Field -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Marital Status"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:layout_margin="10dp"/>
+
+                    <Spinner
+                        android:id="@+id/MHmarital"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:prompt="@string/select_status"
+                        android:padding="20dp"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/edittext"></Spinner>
+                </LinearLayout>
+
+                <!-- Space Between Fields -->
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content"/>
+
+                <!-- Occupation Field -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Occupation"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:layout_margin="10dp"/>
+
+                    <EditText
+                        android:id="@+id/MHoccupation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/edittext"
+                        android:hint="Occupation"
+                        android:textColor="@color/black"
+                        android:padding="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="10dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Personal history (check all that apply)"
+                android:textColor="@color/darkBlue"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <!-- Personal History -->
+            <!-- 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:id="@+id/A1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:text="No known medical conditions">
+                    </CheckBox>
+                </LinearLayout>
+
+                <!-- Space Between Fields -->
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content"/>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:id="@+id/A2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:text="Heart Attack/Heart Disease">
+                    </CheckBox>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:id="@+id/B1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:text="Allergies (Drug, Food, Environmental)">
+                    </CheckBox>
+                </LinearLayout>
+
+                <!-- Space Between Fields -->
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:id="@+id/B2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:text="High Blood Pressure">
+                    </CheckBox>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 3 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:id="@+id/C1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:text="Anemia">
+                    </CheckBox>
+                </LinearLayout>
+
+                <!-- Space Between Fields -->
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:id="@+id/C2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:text="High Cholesterol">
+                    </CheckBox>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 4 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:id="@+id/D1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:text="Anxiety">
+                    </CheckBox>
+                </LinearLayout>
+
+                <!-- Space Between Fields -->
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:id="@+id/D2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:text="HIV/AIDS">
+                    </CheckBox>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 5 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:id="@+id/E1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:text="Asthma">
+                    </CheckBox>
+                </LinearLayout>
+
+                <!-- Space Between Fields -->
+                <Space
+                    android:layout_width="8dp"
+                    android:layout_height="wrap_content"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:id="@+id/E2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/black"
+                        android:text="Kidney Disease/Kidney Stones">
+                    </CheckBox>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Other medical issues:"
+                android:textColor="@color/lightBlack"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <EditText
+                android:id="@+id/MHotherIssues"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext"
+                android:textColor="@color/black"
+                android:padding="20dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Treatments/Medications"
+                android:textColor="@color/darkBlue"
+                android:textSize="23sp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Name(s)"
+                android:textColor="@color/lightBlack"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <EditText
+                android:id="@+id/MHtreatmentName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Dosage(s)"
+                android:textColor="@color/lightBlack"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <EditText
+                android:id="@+id/MHtreatmentDosage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Frequency"
+                android:textColor="@color/lightBlack"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <EditText
+                android:id="@+id/MHtreatmentFrequency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Purpose"
+                android:textColor="@color/lightBlack"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <EditText
+                android:id="@+id/MHtreatmentPurpose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:text="Note(s)"
+                android:textColor="@color/lightBlack"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_margin="10dp"/>
+
+            <EditText
+                android:id="@+id/MHtreatmentNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edittext"
+                android:padding="20dp"
+                android:textColor="@color/black"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/MHSaveBtn"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Save"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/button"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                >
+
+            </androidx.appcompat.widget.AppCompatButton>
+        </LinearLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

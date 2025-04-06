@@ -14,7 +14,6 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         private const val DATABASE_NAME = "medical_app.db"
         private const val DATABASE_VERSION = 4
 
-        // User Table
         private const val TABLE_USERS = "users"
         private const val COLUMN_ID = "id"
         private const val COLUMN_NAME = "name"
@@ -22,7 +21,6 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         private const val COLUMN_PASSWORD = "password"
         private const val COLUMN_ROLE = "role"
 
-        //Medical history table
         private const val TABLE_MEDICAL_HISTORY = "medical_history"
         private const val COLUMN_MH_ID = "id"
         private const val COLUMN_USER_ID = "user_id"
@@ -66,7 +64,6 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        // Create users table
         db.execSQL("""
             CREATE TABLE $TABLE_USERS (
                 $COLUMN_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -77,7 +74,6 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
             )
         """.trimIndent())
 
-        // Create medical_history table
         db.execSQL("""
             CREATE TABLE $TABLE_MEDICAL_HISTORY (
                 $COLUMN_MH_ID INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -113,7 +109,6 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         )
     """.trimIndent())
 
-        // Insert test data
         db.execSQL("""
             INSERT INTO $TABLE_USERS 
             ($COLUMN_NAME, $COLUMN_EMAIL, $COLUMN_PASSWORD, $COLUMN_ROLE) 
@@ -133,7 +128,6 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
 
         when (oldVersion) {
             1 -> {
-                // Version 1 to 2: Create medical_history table
                 db.execSQL(
                     """
                     CREATE TABLE $TABLE_MEDICAL_HISTORY (
@@ -159,7 +153,6 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
             }
 
             2 -> {
-                // Future upgrades would go here
                 if (oldVersion < 3) {
                     db.execSQL("""
         CREATE TABLE IF NOT EXISTS appointments (
@@ -361,7 +354,6 @@ class DatabaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         val notes: String
     )
 
-    // In DatabaseHelper class
     fun insertMedicalHistoryByUsername(
         username: String,
         patientName: String,

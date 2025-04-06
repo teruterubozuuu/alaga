@@ -35,26 +35,33 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_marginTop="8dp">
 
             <Button
-                android:id="@+id/cancelButton"
-                android:layout_width="0dp"
+                android:id="@+id/acceptButton"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_marginEnd="4dp"
-                android:text="Cancel"
-                android:backgroundTint="@color/darkBlue"/>
+                android:text="Accept"
+
+                android:backgroundTint="@color/darkBlue" />
 
             <Button
                 android:id="@+id/rescheduleButton"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginStart="4dp"
                 android:text="Reschedule"
                 android:backgroundTint="@color/darkBlue"/>
+
+            <Button
+                android:id="@+id/cancelButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cancel"
+                android:backgroundTint="@color/darkBlue"/>
+
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

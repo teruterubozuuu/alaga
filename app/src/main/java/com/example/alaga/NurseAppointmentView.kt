@@ -1,6 +1,7 @@
 package com.example.alaga
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,13 @@ class NurseAppointmentView : AppCompatActivity() {
         dbHelper = DatabaseHelper(this)
         recyclerView = findViewById(R.id.recyclerViewAppointments)
         recyclerView.layoutManager = LinearLayoutManager(this)
+
+        findViewById<Button>(R.id.backButton).setOnClickListener {
+            val intent = Intent(this, Homepage::class.java)
+            startActivity(intent)
+            finish()
+        }
+
 
         loadAppointments()
     }

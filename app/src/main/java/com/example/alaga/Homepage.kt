@@ -5,13 +5,10 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.marginEnd
-import androidx.core.view.marginTop
 
 class Homepage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,10 +56,10 @@ class Homepage : AppCompatActivity() {
 
 
         val roleButtons = when (role) {
-            "Admin" -> listOf("Personal Details", "Appointment History", "User Account Module", "Patient Information Module")
-            "Doctor" -> listOf("Personal Details", "Patient List", "Appointment History")
+            "Admin" -> listOf("Personal Details", "View Appointments", "User Account Module", "Patient Information Module")
+            "Doctor" -> listOf("Personal Details","Patients List", "View Appointments")
             "Nurse" -> listOf("Personal Details", "Patients List", "View Appointments")
-            "Patient" -> listOf("Personal Details", "Medical History (Patient)", "Appointment History", "Patient Appointment System")
+            "Patient" -> listOf("Personal Details", "Medical History", "View Appointments", "Patient Appointment System")
             else -> emptyList()
         }
 
@@ -79,15 +76,17 @@ class Homepage : AppCompatActivity() {
                         "Personal Details" -> startActivity(Intent(this@Homepage, PersonalDetails::class.java))
                         "User Account Module" -> startActivity(Intent(this@Homepage, UserAccountModule::class.java))
                         "Patient Information Module" -> startActivity(Intent(this@Homepage, PatientAccountModule::class.java))
-                        "Medical History (Patient)" -> {
+                        "Medical History" -> {
                             val intent = Intent(this@Homepage, PatientMedHistory::class.java)
-                            // Pass the username explicitly
                             intent.putExtra("username", getSharedPreferences("UserSession", MODE_PRIVATE).getString("username", ""))
                             startActivity(intent)
                         }
+                        "Patients List" -> {
+                            val intent = Intent(this@Homepage, DoctorMedHistoryList::class.java)
+                            startActivity(intent)
+                        }
                         "Patient Appointment System" -> startActivity(Intent(this@Homepage, PatientAppointment::class.java))
-                        "View Appointments" -> startActivity(Intent(this@Homepage, NurseAppointmentView::class.java))
-                        "Appointment History" -> startActivity(Intent(this@Homepage, AppointmentHistory::class.java))
+                        "View Appointments" -> startActivity(Intent(this@Homepage, AppointmentHistory::class.java))
                     }
                 }
             }
