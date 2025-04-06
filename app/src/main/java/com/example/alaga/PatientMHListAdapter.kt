@@ -29,12 +29,7 @@ class PatientMHListAdapter(
         val patient = patients[position]
         holder.patientName.text = patient.patientName
 
-        holder.viewHistoryBtn.setOnClickListener {
-            val intent = Intent(context, DocMedHistoryView::class.java).apply {
-                putExtra("patient_name", patient.patientName)
-            }
-            context.startActivity(intent)
-        }
+
     }
 
     override fun getItemCount() = patients.size

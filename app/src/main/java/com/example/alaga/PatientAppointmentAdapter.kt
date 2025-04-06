@@ -82,6 +82,11 @@ class PatientAppointmentAdapter(
                     holder.cancelBtn.visibility = View.VISIBLE
                     holder.rescheduleBtn.visibility = View.VISIBLE
                 }
+                "Nurse" -> {
+                    holder.acceptBtn.visibility = View.GONE
+                    holder.cancelBtn.visibility = View.GONE
+                    holder.rescheduleBtn.visibility = View.VISIBLE
+                }
                 else -> {
                     holder.cancelBtn.visibility = View.GONE
                     holder.rescheduleBtn.visibility = View.GONE
